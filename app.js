@@ -10,7 +10,7 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
 app.use(logger(formatsLogger)).use(cors());
 
 // ROUTERS
-app.use('/api/users', api.users);
+app.use('/api/users', api.users).use('/api/transactions', api.transactions);
 
 // ERROR HANDLER
 app
