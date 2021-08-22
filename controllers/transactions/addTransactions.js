@@ -1,7 +1,7 @@
 const { transactions: service } = require('../../services');
 
 module.exports = async ({ body, user: { id } }, res) => {
-  const result = await service.addTransaction(id, body);
+  const result = await service.addTransactions(id, body);
 
   return res.status(201).json({
     status: 'Created',

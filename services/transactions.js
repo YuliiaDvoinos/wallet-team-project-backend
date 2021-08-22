@@ -2,6 +2,8 @@ const { Transaction } = require('../models');
 
 module.exports = {
   // add transaction
-  addTransaction: (userId, body) =>
+  addTransactions: (userId, body) =>
     Transaction.create({ owner: userId, ...body }),
+  // get transactions
+  getTransactions: userId => Transaction.find({ owner: userId }),
 };
