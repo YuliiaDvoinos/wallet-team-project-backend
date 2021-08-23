@@ -7,4 +7,17 @@ module.exports = {
   // get transactions
   getTransactions: userId =>
     Transaction.find({ owner: userId }).populate('category'),
+  // get transactions by date
+  getTransactionsByDate: (userId, month, year) =>
+    Transaction.find({ owner: userId, month, year }).populate('category'),
+  // get all income
+  getAllIncome: userId => Transaction.find({ owner: userId, type: 'income' }),
+  // get all income by date
+  getAllIncomeByDate: (userId, month, year) =>
+    Transaction.find({ owner: userId, type: 'income', month, year }),
+  // get all spend
+  getAllSpend: userId => Transaction.find({ owner: userId, type: 'spend' }),
+  // get all spend by date
+  getAllSpendByDate: (userId, month, year) =>
+    Transaction.find({ owner: userId, type: 'spend', month, year }),
 };

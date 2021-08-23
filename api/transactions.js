@@ -8,9 +8,9 @@ module.exports = express
   // @ GET /api/transactions
   .get('/', authenticate, asyncWrapper(ctrl.getTransactions))
 
-  // @ GET /api/transactions/statistic
-  // @ GET /api/transactions/statistic?month=00&year=0000
-  .get('/', authenticate, asyncWrapper(ctrl.getTransactionsStatistic))
+  // @ GET /api/transactions/statistics
+  // @ GET /api/transactions/statistics?month=00&year=0000
+  .get('/statistics', authenticate, asyncWrapper(ctrl.getStatistics))
 
   // @ POST /api/transactions
   .post('/', express.json(), authenticate, asyncWrapper(ctrl.addTransactions));

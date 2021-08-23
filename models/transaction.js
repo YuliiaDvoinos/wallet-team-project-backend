@@ -6,6 +6,14 @@ const transactionSchema = Schema(
       type: String,
       default: new Date().toLocaleDateString(),
     },
+    month: {
+      type: String,
+      default: new Date().toLocaleDateString().slice(3, 5),
+    },
+    year: {
+      type: String,
+      default: new Date().toLocaleDateString().slice(6),
+    },
     comment: {
       type: String,
       default: '',
