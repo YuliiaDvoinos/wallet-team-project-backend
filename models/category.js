@@ -4,8 +4,7 @@ const categorySchema = Schema(
   {
     name: {
       type: String,
-      minlength: [2, 'contact name must contain a minimum of 2 letters.'],
-      required: [true, 'is required, set name for contact'],
+      required: [true, 'category name is required'],
     },
   },
   { versionKey: false },
