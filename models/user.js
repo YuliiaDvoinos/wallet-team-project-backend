@@ -3,6 +3,10 @@ const bcrypt = require('bcryptjs');
 
 const userSchema = Schema(
   {
+    balance: {
+      type: Number,
+      default: 0,
+    },
     email: {
       type: String,
       required: [true, 'email is required'],
