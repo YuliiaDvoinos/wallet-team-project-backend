@@ -5,5 +5,6 @@ module.exports = {
   addTransactions: (userId, body) =>
     Transaction.create({ owner: userId, ...body }),
   // get transactions
-  getTransactions: userId => Transaction.find({ owner: userId }),
+  getTransactions: userId =>
+    Transaction.find({ owner: userId }).populate('category'),
 };

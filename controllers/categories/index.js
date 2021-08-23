@@ -1,3 +1,4 @@
 module.exports = {
-    getCategories: require('./getCategories')
-}
+  addCategories: require('./addCategories'),
+  getCategories: require('./getCategories'),
+};
