@@ -18,13 +18,7 @@ module.exports = async ({ body: { email, password } }, res) => {
   return res.json({
     status: 'Success',
     code: 200,
-    data: {
-      result: {
-        name: user.name,
-        email: user.email,
-        id: user._id,
-        token,
-      },
-    },
+    user: { name: user.name, email: user.email },
+    token,
   });
 };

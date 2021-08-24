@@ -1,8 +1,10 @@
 const { users: service } = require('../../services');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 module.exports = async ({ body: { email, password, name } }, res) => {
-  const user = await service.getUser({ email });
-  if (user) {
+  const userExists = await service.getUser({ email });
+  if (userExists) {
     return res.status(409).json({
       status: 'Conflict',
       code: 409,
@@ -10,21 +12,15 @@ module.exports = async ({ body: { email, password, name } }, res) => {
     });
   }
 
-  const { _id } = await service.register({
-    email,
-    password,
-    name,
-  });
+  const user = await service.register({ email, password, name });
+
+  const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
+  await service.updateUser(user._id, { token });
 
   return res.status(201).json({
     status: 'Created',
     code: 201,
-    data: {
-      result: {
-        _id,
-        email,
-        name,
-      },
-    },
+    user: { name: user.name, email: user.email },
+    token,
   });
 };
