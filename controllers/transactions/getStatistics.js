@@ -1,18 +1,33 @@
 const { transactions: service } = require('../../services');
 
 module.exports = async ({ user: { id }, query: { month, year } }, res) => {
-  let totalIncome;
-  let totalSpend;
+  let totalIncomeArr;
+  let totalSpendArr;
 
-  const amount = array => array.reduce((acc, { money }) => acc + money, 0);
+  const amountMoney = array => array.reduce((acc, { money }) => acc + money, 0);
+  const amountCategories = array =>
+    array.reduce((acc, value) => {
+      const category = value.category.name;
+      const { money } = value;
+
+      acc[category]
+        ? (acc[category] = acc[category] += money)
+        : (acc[category] = money);
+
+      return acc;
+    }, {});
 
   if (month && year) {
-    totalIncome = amount(await service.getAllIncomeByDate(id, month, year));
-    totalSpend = amount(await service.getAllSpendByDate(id, month, year));
+    totalIncomeArr = await service.getAllIncomeByDate(id, month, year);
+    totalSpendArr = await service.getAllSpendByDate(id, month, year);
   } else {
-    totalIncome = amount(await service.getAllIncome(id));
-    totalSpend = amount(await service.getAllSpend(id));
+    totalIncomeArr = await service.getAllIncome(id);
+    totalSpendArr = await service.getAllSpend(id);
   }
+
+  const totalIncome = amountMoney(totalIncomeArr);
+  const totalSpend = amountMoney(totalSpendArr);
+  const categoriesSummary = amountCategories(totalSpendArr);
 
   return res.json({
     status: 'Success',
@@ -20,6 +35,7 @@ module.exports = async ({ user: { id }, query: { month, year } }, res) => {
     data: {
       totalIncome,
       totalSpend,
+      categoriesSummary,
     },
   });
 };
