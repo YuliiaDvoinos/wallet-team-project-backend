@@ -1,9 +1,8 @@
-module.exports = async ({ user: { id, balance, token, email, name } }, res) => {
+module.exports = async ({ user: { balance, token, email, name } }, res) => {
   return res.json({
     status: 'Success',
     code: 200,
-    data: {
-      result: { id, name, email, balance, token },
-    },
+    user: { name, email, balance },
+    token,
   });
 };
