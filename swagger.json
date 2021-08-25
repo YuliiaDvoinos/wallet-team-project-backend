@@ -88,6 +88,11 @@
                               "example": "test@gmail.com"
                             }
                           }
+                        },
+                        "token": {
+                          "type": "string",
+                          "description": "The user's token",
+                          "example": "eyXVCJ9.5ZSIsImlhdC._UDass-n2gP7nh4"
                         }
                       }
                     }
@@ -147,6 +152,200 @@
             }
           }
         }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "End-point for users login",
+        "requestBody": {
+          "description": "login's body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password", "name"],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "description": "users email",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "users password",
+                    "example": "Qweqwe123123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "login success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "user": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "The user's name.",
+                              "example": "test"
+                            },
+                            "email": {
+                              "type": "string",
+                              "description": "The user's email",
+                              "example": "test@gmail.com"
+                            }
+                          }
+                        },
+                        "token": {
+                          "type": "string",
+                          "description": "The user's token",
+                          "example": "eyXVCJ9.5ZSIsImlhdC._UDass-n2gP7nh4"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": " Service message",
+                      "example": "incorrect email or password"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/current": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "End-point for get current user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Сurrent user data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "user": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "The user's name.",
+                              "example": "test"
+                            },
+                            "email": {
+                              "type": "string",
+                              "description": "The user's email",
+                              "example": "test@gmail.com"
+                            },
+                            "ballance": {
+                              "type": "intejer",
+                              "description": "The user's ballance",
+                              "example": 0
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 401
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": " Service message",
+                      "example": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
