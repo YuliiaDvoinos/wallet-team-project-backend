@@ -12,7 +12,7 @@ module.exports = express
   // @ GET /api/users/current
   .get('/current', authenticate, asyncWrapper(ctrl.current))
 
-  // @ POST /api/users/signup
+  // @ POST /api/users/register
   .post(
     '/register',
     express.json(),
