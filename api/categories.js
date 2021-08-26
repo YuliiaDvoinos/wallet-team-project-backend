@@ -8,5 +8,5 @@ module.exports = express
   // @ GET /api/categories
   .get('/', authenticate, asyncWrapper(ctrl.getCategories))
 
-  // @ POST /api/categories
+  // @ POST /api/categories (technical route)
   .post('/', express.json(), authenticate, asyncWrapper(ctrl.addCategories));

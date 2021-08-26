@@ -3,6 +3,9 @@ const logger = require('morgan');
 const cors = require('cors');
 const api = require('./api');
 require('./config/passport');
+//swagger
+const swaggerUI = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 // EXPRESS MIDDLEWARES
 const app = express();
@@ -10,7 +13,11 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
 app.use(logger(formatsLogger)).use(cors());
 
 // ROUTERS
-app.use('/api/users', api.users).use('/api/transactions', api.transactions).use('/api/categories/', api.categories)
+app
+  .use('/api/users', api.users)
+  .use('/api/transactions', api.transactions)
+  .use('/api/categories/', api.categories)
+  .use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // ERROR HANDLER
 app
