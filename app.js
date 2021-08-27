@@ -17,7 +17,7 @@ app
   .use('/api/users', api.users)
   .use('/api/transactions', api.transactions)
   .use('/api/categories/', api.categories)
-  .use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+  .use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // ERROR HANDLER
 app
