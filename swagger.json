@@ -15,7 +15,7 @@
       "description": "local development server"
     },
     {
-      "url": "https://wallet-team-project-backend.herokuapp.com",
+      "url": "https://wallet-tpb.herokuapp.com",
       "description": "API base URL"
     }
   ],
