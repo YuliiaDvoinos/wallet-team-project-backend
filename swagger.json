@@ -616,6 +616,216 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": ["Transactions"],
+        "summary": "End-point to add transactions",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Transaction body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["type", "category", "money"],
+                "properties": {
+                  "date": {
+                    "type": "string",
+                    "description": "date of transaction",
+                    "example": "01.09.2021"
+                  },
+                  "month": {
+                    "type": "string",
+                    "description": "Month of transaction",
+                    "example": "09"
+                  },
+                  "year": {
+                    "type": "string",
+                    "description": "Year of transaction",
+                    "example": "2021"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "description": "comment to transaction",
+                    "example": ""
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "type of transaction(spend or income)",
+                    "example": "income"
+                  },
+                  "category": {
+                    "type": "string",
+                    "description": "category of transaction(takes a category id)",
+                    "example": "6123a7cde3f3d91c10951e25"
+                  },
+                  "money": {
+                    "type": "integer",
+                    "description": "spend or income sum",
+                    "example": 1000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 201
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "date": {
+                              "type": "string",
+                              "description": "date of transaction",
+                              "example": "01.09.2021"
+                            },
+                            "month": {
+                              "type": "string",
+                              "description": "month of transaction",
+                              "example": "09"
+                            },
+                            "year": {
+                              "type": "string",
+                              "description": "year of transaction",
+                              "example": "2021"
+                            },
+                            "comment": {
+                              "type": "string",
+                              "description": "comment to transaction",
+                              "example": ""
+                            },
+                            "type": {
+                              "type": "string",
+                              "description": "type of transaction(spend or income)",
+                              "example": "income"
+                            },
+                            "_id": {
+                              "type": "string",
+                              "description": "transaction id",
+                              "example": "6128aef7ae8c0635d47093fd"
+                            },
+                            "owner": {
+                              "type": "string",
+                              "description": "user's id",
+                              "example": "61266348626da3337cd530ff"
+                            },
+                            "category": {
+                              "type": "string",
+                              "description": "category of transaction(takes a category id)",
+                              "example": "6123a7cde3f3d91c10951e25"
+                            },
+                            "money": {
+                              "type": "integer",
+                              "description": "spend or income sum",
+                              "example": 1000
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 401
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": " Service message",
+                      "example": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": " Service message",
+                      "example": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": " Service message",
+                      "example": "Transaction validation failed"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/transactions/statistics": {
