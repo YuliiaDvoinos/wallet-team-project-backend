@@ -13,6 +13,10 @@
     {
       "url": "http://localhost:4000",
       "description": "local development server"
+    },
+    {
+      "url": "https://wallet-team-project-backend.herokuapp.com",
+      "description": "API base URL"
     }
   ],
   "tags": [
