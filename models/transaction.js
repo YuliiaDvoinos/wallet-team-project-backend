@@ -56,11 +56,6 @@ const transactionSchema = Schema(
       min: 0,
       required: [true, 'Money is required'],
     },
-    prevBalance: {
-      type: Number,
-      default: 0,
-      required: true,
-    },
   },
   { versionKey: false },
 );
