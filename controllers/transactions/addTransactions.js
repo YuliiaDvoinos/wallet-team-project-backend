@@ -1,7 +1,7 @@
 const { users, transactions: service } = require('../../services');
 
 module.exports = async ({ body, user: { id, balance } }, res) => {
-  const result = await service.addTransactions(id, body);
+  const result = await service.addTransactions(id, body, balance);
 
   if (result.type === 'income') {
     const updateBalance = (balance += result.money);
