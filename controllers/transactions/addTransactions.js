@@ -1,16 +1,16 @@
 const { users, transactions: service } = require('../../services');
 
 module.exports = async ({ body, user: { id, balance } }, res) => {
-  const result = await service.addTransactions(id, body);
+  if (body.type === 'income') {
+    const updatedBalance = (balance += body.money);
+    await users.updateUser(id, { balance: updatedBalance });
+  }
+  if (body.type === 'spend') {
+    const updatedBalance = (balance -= body.money);
+    await users.updateUser(id, { balance: updatedBalance });
+  }
 
-  if (result.type === 'income') {
-    const updateBalance = (balance += result.money);
-    await users.updateUser(id, { balance: updateBalance });
-  }
-  if (result.type === 'spend') {
-    const updateBalance = (balance -= result.money);
-    await users.updateUser(id, { balance: updateBalance });
-  }
+  const result = await service.addTransactions(id, body, balance);
 
   return res.status(201).json({
     status: 'Created',

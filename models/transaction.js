@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const transactionSchema = Schema(
   {
+    balance: { type: Number },
     date: {
       type: String,
       default: new Date().toLocaleDateString(),
@@ -33,24 +34,6 @@ const transactionSchema = Schema(
       ref: 'category',
       required: true,
     },
-    // category: {
-    //   type: String,
-    //   enum: [
-    //     'main',
-    //     'food',
-    //     'car',
-    //     'development',
-    //     'children',
-    //     'house',
-    //     'education',
-    //     'leisure',
-    //     'other',
-    //     'regularIncome',
-    //     'irregularIncome',
-    //   ],
-    //   default: 'other',
-    //   required: [true, 'Category is required'],
-    // },
     money: {
       type: Number,
       min: 0,
@@ -61,3 +44,15 @@ const transactionSchema = Schema(
 );
 
 module.exports = model('transaction', transactionSchema);
+
+//     'main',
+//     'food',
+//     'car',
+//     'development',
+//     'children',
+//     'house',
+//     'education',
+//     'leisure',
+//     'other',
+//     'regularIncome',
+//     'irregularIncome',
