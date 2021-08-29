@@ -14,7 +14,7 @@ const schemaRegisterUser = Joi.object({
   password: Joi.string()
     .pattern(/^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/)
     .required(),
-  name: Joi.string().alphanum().min(2).max(40).required(),
+  name: Joi.string().min(1).max(12).required(),
 });
 
 const schemaLoginUser = Joi.object({
