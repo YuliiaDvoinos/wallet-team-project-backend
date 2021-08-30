@@ -40,7 +40,7 @@ const transactionSchema = Schema(
       required: [true, 'Money is required'],
     },
   },
-  { versionKey: false },
+  { versionKey: false, timestamps: true },
 );
 
 module.exports = model('transaction', transactionSchema);

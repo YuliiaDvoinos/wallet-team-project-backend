@@ -7,7 +7,7 @@ const categorySchema = Schema(
       required: [true, 'category name is required'],
     },
   },
-  { versionKey: false },
+  { versionKey: false, timestamps: true },
 );
 
 module.exports = model('category', categorySchema);

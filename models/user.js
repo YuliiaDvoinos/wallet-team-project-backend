@@ -27,7 +27,7 @@ const userSchema = Schema(
       default: null,
     },
   },
-  { versionKey: false },
+  { versionKey: false, timestamps: true },
 );
 
 userSchema.methods.hashPassword = function (password) {
