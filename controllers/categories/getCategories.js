@@ -6,8 +6,6 @@ module.exports = async (_, res) => {
   return res.json({
     status: 'Success',
     code: 200,
-    data: {
-      result,
-    },
+    result,
   });
 };
