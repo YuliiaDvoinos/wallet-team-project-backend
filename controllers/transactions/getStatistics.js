@@ -1,9 +1,6 @@
 const { transactions: service } = require('../../services');
 
-module.exports = async ({ user: { id }, query: { month, year } }, res) => {
-  let totalIncomeArr;
-  let totalSpendArr;
-
+module.exports = async ({ user: { id }, query }, res) => {
   const amountMoney = array => array.reduce((acc, { money }) => acc + money, 0);
   const amountCategories = array =>
     array.reduce((acc, value) => {
@@ -16,10 +13,36 @@ module.exports = async ({ user: { id }, query: { month, year } }, res) => {
 
       return acc;
     }, {});
+  //
+  const getUniqueMonth = array =>
+    array.reduce((acc, { month }) => {
+      if (!acc.includes(month)) {
+        acc.push(month);
+      }
+      return acc;
+    }, []);
+  const getUniqueYear = array =>
+    array.reduce((acc, { year }) => {
+      if (!acc.includes(year)) {
+        acc.push(year);
+      }
+      return acc;
+    }, []);
 
-  if (month && year) {
-    totalIncomeArr = await service.getAllIncomeByDate(id, month, year);
-    totalSpendArr = await service.getAllSpendByDate(id, month, year);
+  let totalIncomeArr;
+  let totalSpendArr;
+
+  if (query.month && query.year) {
+    totalIncomeArr = await service.getAllIncomeByDate(
+      id,
+      query.month,
+      query.year,
+    );
+    totalSpendArr = await service.getAllSpendByDate(
+      id,
+      query.month,
+      query.year,
+    );
   } else {
     totalIncomeArr = await service.getAllIncome(id);
     totalSpendArr = await service.getAllSpend(id);
@@ -28,14 +51,18 @@ module.exports = async ({ user: { id }, query: { month, year } }, res) => {
   const totalIncome = amountMoney(totalIncomeArr);
   const totalSpend = amountMoney(totalSpendArr);
   const categoriesSummary = amountCategories(totalSpendArr);
+  const uniqueMonth = getUniqueMonth(totalSpendArr);
+  const uniqueYear = getUniqueYear(totalSpendArr);
 
   return res.json({
     status: 'Success',
     code: 200,
     data: {
+      categoriesSummary,
       totalIncome,
       totalSpend,
-      categoriesSummary,
+      uniqueMonth: uniqueMonth.sort(),
+      uniqueYear: uniqueYear.sort(),
     },
   });
 };
