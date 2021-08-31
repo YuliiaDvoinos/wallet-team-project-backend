@@ -8,7 +8,8 @@ Additional description about the project and its features.
 
 - Major language - ![](https://img.shields.io/badge/JavaScript-blueviolet)
 - Backend - ![](https://img.shields.io/badge/NODE.js-blueviolet)
-- Technologies used ![](https://img.shields.io/badge/express-blueviolet)
+- Technologies used - 
+- ![](https://img.shields.io/badge/express-blueviolet)
   ![](https://img.shields.io/badge/nodemon-blueviolet)
   ![](https://img.shields.io/badge/mongoose-blueviolet)
   ![](https://img.shields.io/badge/jsonwebtoken-blueviolet)
