@@ -6,8 +6,10 @@ Additional description about the project and its features.
 
 ## Built With
 
-- Major language - ![](https://img.shields.io/badge/JavaScript-blueviolet)
-- Backend - ![](https://img.shields.io/badge/NODE.js-blueviolet)
+- Major language - 
+- ![](https://img.shields.io/badge/JavaScript-blueviolet)
+- Backend - 
+- ![](https://img.shields.io/badge/NODE.js-blueviolet)
 - Technologies used - 
 - ![](https://img.shields.io/badge/express-blueviolet)
   ![](https://img.shields.io/badge/nodemon-blueviolet)
